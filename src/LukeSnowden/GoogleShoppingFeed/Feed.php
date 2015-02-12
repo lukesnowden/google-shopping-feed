@@ -166,13 +166,30 @@ class Feed {
 	 * @param  [type] $selected [description]
 	 * @return [type]           [description]
 	 */
-	public function categories( $selected = null ) {
+	public function categories() {
 		$cache = new Cache;
 		$cache->setCacheDirectory($this->cacheDir);
 		$data = $cache->getOrCreate('google-feed-taxonomy.txt', array( 'max-age' => '860400' ), function() {
 		    return file_get_contents("http://www.google.com/basepages/producttype/taxonomy.en-GB.txt");
 		});
-		return explode( "\n", $data );
+		return explode( "\n", trim($data) );
+	}
+
+	/**
+	 * [categoriesAsSelect description]
+	 * @param  string $selected [description]
+	 * @return [type]           [description]
+	 */
+	public function categoriesAsSelect( $selected = '' ) {
+		$categories = $this->categories();
+		unset($categories[0]);
+		$select = '<select name="google_category">';
+		$select .= '<option value="">Please select a Google Category</option>';
+		foreach( $categories as $category ) {
+			$select .= '<option ' . ( $category == $selected ? 'selected' : '' ) . ' name="' . $category . '">' . $category . '</option>';
+		}
+		$select .= '</select>';
+		return $select;
 	}
 
 	/**
