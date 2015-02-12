@@ -41,6 +41,9 @@ foreach( $products as $product ) {
 
 }
 
+// boolean value indicates output to browser
+GoogleShopping::asRss(true);
+
 ```
 
 ###Category Taxonomies
