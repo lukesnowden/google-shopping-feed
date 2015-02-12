@@ -2,6 +2,7 @@
 
 use SimpleXMLElement;
 use LukeSnowden\GoogleShoppingFeed\Item;
+use Gregwar\Cache\Cache;
 
 class Feed {
 
@@ -40,6 +41,12 @@ class Feed {
 	 * @var string
 	 */
 	private $title = '';
+
+	/**
+	 * [$cacheDir description]
+	 * @var string
+	 */
+	private $cacheDir = 'cache';
 
 	/**
 	 * [$description description]
@@ -152,6 +159,20 @@ class Feed {
 				$itemNode->attachNodeTo( $feedItemNode );
 			}
 		}
+	}
+
+	/**
+	 * [categories description]
+	 * @param  [type] $selected [description]
+	 * @return [type]           [description]
+	 */
+	public function categories( $selected = null ) {
+		$cache = new Cache;
+		$cache->setCacheDirectory($this->cacheDir);
+		$data = $cache->getOrCreate('google-feed-taxonomy.txt', array( 'max-age' => '860400' ), function() {
+		    return file_get_contents("http://www.google.com/basepages/producttype/taxonomy.en-GB.txt");
+		});
+		return explode( "\n", $data );
 	}
 
 	/**
