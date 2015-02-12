@@ -42,3 +42,11 @@ foreach( $products as $product ) {
 }
 
 ```
+
+###Category Taxonomies
+
+returns a list of the categories. The list is updated daily from Googles Documentation
+
+```php
+$googleCategories = GoogleShopping::categories();
+```
