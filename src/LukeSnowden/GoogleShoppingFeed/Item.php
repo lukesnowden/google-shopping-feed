@@ -91,7 +91,7 @@ class Item {
 	 */
 	public function link( $link ) {
 		$node = new Node('link');
-		$this->nodes['link'] = $node->value( rawurlencode( $link ) );
+		$this->nodes['link'] = $node->value( $link );
 	}
 
 	/**
@@ -151,7 +151,7 @@ class Item {
 	 */
 	public function image_link( $imageLink ) {
 		$node = new Node('image_link');
-		$this->nodes['image_link'] = $node->value( rawurlencode( $imageLink ) )->_namespace($this->namespace);
+		$this->nodes['image_link'] = $node->value( $imageLink )->_namespace($this->namespace);
 	}
 
 	/**
