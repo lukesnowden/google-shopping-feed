@@ -214,7 +214,10 @@ class Item {
 	public function shipping( $code, $service, $cost ) {
 		$node = new Node('shipping');
 		$value = "<g:country>{$code}</g:country><g:service>{$service}</g:service><g:price>{$cost}</g:price>";
-		$this->nodes['shipping'] = $node->value($value)->_namespace($this->namespace);
+		if( ! isset( $this->nodes['shipping'] ) ) {
+			$this->nodes['shipping'] = array();
+		}
+		$this->nodes['shipping'][] = $node->value($value)->_namespace($this->namespace);
 	}
 
 	/**
@@ -284,12 +287,21 @@ class Item {
 		$item = GoogleShopping::createItem();
 		$this->item_group_id( $this->nodes['mpn']->get('value') . '_group' );
 		foreach( $this->nodes as $node ) {
-			if( $node->get('name') !== 'shipping' ) {
+			if( is_array( $node ) ) {
+				// multiple accepted values..
+				$name = $node[0]->get('name');
+				foreach( $node as $_node ) {
+					if( $name == 'shipping' ) {
+						// Shipping has another layer so we are going to have to do a little hack
+						$xml = simplexml_load_string( '<foo>' . trim( str_replace( 'g:', '', $_node->get('value') ) ) . '</foo>' );
+						$item->{$_node->get('name')}( $xml->country, $xml->service, $xml->price );
+					} else {
+						$item->{$name}( $_node->get('value') );
+					}
+				}
+
+			} else if( $node->get('name') !== 'shipping' ) {
 				$item->{$node->get('name')}( $node->get('value') );
-			} else {
-				// Shipping has another layer so we are going to have to do a little hack
-				$xml = simplexml_load_string( '<foo>' . trim( str_replace( 'g:', '', $node->get('value') ) ) . '</foo>' );
-				$item->{$node->get('name')}( $xml->country, $xml->service, $xml->price );
 			}
 		}
 		return $item;

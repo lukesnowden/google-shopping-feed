@@ -156,7 +156,13 @@ class Feed {
 		foreach( $this->items as $item ) {
 			$feedItemNode = $this->feed->channel->addChild('item');
 			foreach( $item->nodes() as $itemNode ) {
-				$itemNode->attachNodeTo( $feedItemNode );
+				if( is_array( $itemNode ) ) {
+					foreach( $itemNode as $node ) {
+						$feedItemNode->addChild( $node->get('name'), $node->get('value'), $node->get('_namespace'));
+					}
+				} else {
+					$itemNode->attachNodeTo( $feedItemNode );
+				}
 			}
 		}
 	}
