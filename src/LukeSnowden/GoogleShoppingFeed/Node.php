@@ -78,7 +78,6 @@ class Node {
 	 * @return [type]         [description]
 	 */
 	public function attachNodeTo( $parent ) {
-
 		if( $this->cdata && ! preg_match( "#^<!\[CDATA#is", $this->value ) ) {
 			$this->value = "<![CDATA[{$this->value}]]>";
 		}

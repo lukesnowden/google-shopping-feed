@@ -202,13 +202,15 @@ class Feed {
 	 * [asRss description]
 	 * @return [type] [description]
 	 */
-	public function asRss( $addHeaders = false ) {
+	public function asRss( $output = false ) {
 		ob_end_clean();
-		if( $addHeaders ) {
-			header('Content-Type: application/xml; charset=utf-8');
-		}
 		$this->addItemsToFeed();
-		die( html_entity_decode( $this->feed->asXml() ) );
+		$data = html_entity_decode( $this->feed->asXml() );
+		if( $output ) {
+			header('Content-Type: application/xml; charset=utf-8');
+			die( $data );
+		}
+		return $data;
 	}
 
 }

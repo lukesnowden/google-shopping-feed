@@ -91,7 +91,7 @@ class Item {
 	 */
 	public function link( $link ) {
 		$node = new Node('link');
-		$this->nodes['link'] = $node->value( $link );
+		$this->nodes['link'] = $node->value( $link )->addCdata();
 	}
 
 	/**
@@ -131,7 +131,7 @@ class Item {
 	 */
 	public function condition( $condition ) {
 		$node = new Node('condition');
-		$this->nodes['condition'] = $node->value($condition)->_namespace($this->namespace);
+		$this->nodes['condition'] = $node->value($condition)->_namespace($this->namespace)->addCdata();
 	}
 
 	/**
@@ -141,7 +141,7 @@ class Item {
 	 */
 	public function expiration_date( $expirationDate ) {
 		$node = new Node('expiration_date');
-		$this->nodes['expiration_date'] = $node->value($expirationDate)->_namespace($this->namespace);
+		$this->nodes['expiration_date'] = $node->value($expirationDate)->_namespace($this->namespace)->addCdata();
 	}
 
 	/**
@@ -151,7 +151,7 @@ class Item {
 	 */
 	public function image_link( $imageLink ) {
 		$node = new Node('image_link');
-		$this->nodes['image_link'] = $node->value( $imageLink )->_namespace($this->namespace);
+		$this->nodes['image_link'] = $node->value( $imageLink )->_namespace($this->namespace)->addCdata();
 	}
 
 	/**
@@ -161,7 +161,7 @@ class Item {
 	 */
 	public function brand( $brand ) {
 		$node = new Node('brand');
-		$this->nodes['brand'] = $node->value($brand)->_namespace($this->namespace);
+		$this->nodes['brand'] = $node->value($brand)->_namespace($this->namespace)->addCdata();
 	}
 
 	/**
@@ -171,7 +171,7 @@ class Item {
 	 */
 	public function mpn( $mpn ) {
 		$node = new Node('mpn');
-		$this->nodes['mpn'] = $node->value($mpn)->_namespace($this->namespace);
+		$this->nodes['mpn'] = $node->value($mpn)->_namespace($this->namespace)->addCdata();
 	}
 
 	/**
