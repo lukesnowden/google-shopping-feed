@@ -91,7 +91,7 @@ class Item {
 	 */
 	public function link( $link ) {
 		$node = new Node('link');
-		$link = $this->safeCharEncode( $link );
+		$link = $this->safeCharEncodeURL( $link );
 		$this->nodes['link'] = $node->value( $link )->addCdata();
 	}
 
@@ -122,6 +122,7 @@ class Item {
 	 */
 	public function description( $description ) {
 		$node = new Node('description');
+		$description = $this->safeCharEncodeText( $description );
 		$this->nodes['description'] = $node->value(substr($description,0,5000))->_namespace($this->namespace)->addCdata();
 	}
 
@@ -152,7 +153,7 @@ class Item {
 	 */
 	public function image_link( $imageLink ) {
 		$node = new Node('image_link');
-		$imageLink = $this->safeCharEncode( $imageLink );
+		$imageLink = $this->safeCharEncodeURL( $imageLink );
 		$this->nodes['image_link'] = $node->value( $imageLink )->_namespace($this->namespace)->addCdata();
 	}
 
@@ -324,10 +325,22 @@ class Item {
 	 * @param  [type] $string [description]
 	 * @return [type]         [description]
 	 */
-	private function safeCharEncode( $string ) {
+	private function safeCharEncodeURL( $string ) {
 		return str_replace(
 			array('[',']','{','}','|',' ','"','<','>','#','%','\\','^','~','`'),
 			array('%5b','%5d','%7b','%7d','%7c','%20','%22','%3c','%3e','%23','%25','%5c','%5e','%7e','%60'),
+		$string );
+	}
+
+	/**
+	 * [safeCharEncodeText description]
+	 * @param  [type] $string [description]
+	 * @return [type]         [description]
+	 */
+	private function safeCharEncodeText( $string ) {
+		return str_replace(
+			array('•','”','“','’','‘','™','®','°'),
+			array('&#8226;','&#8221;','&#8220;','&#8217;','&#8216;','&trade;','&reg;','&deg;'),
 		$string );
 	}
 
