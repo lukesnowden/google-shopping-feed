@@ -81,6 +81,7 @@ class Item {
 	 */
 	public function title( $title ) {
 		$node = new Node('title');
+		$title = $this->safeCharEncodeText( $title );
 		$this->nodes['title'] = $node->value($title)->addCdata();
 	}
 
@@ -164,6 +165,7 @@ class Item {
 	 */
 	public function brand( $brand ) {
 		$node = new Node('brand');
+		$brand = $this->safeCharEncodeText( $brand );
 		$this->nodes['brand'] = $node->value($brand)->_namespace($this->namespace)->addCdata();
 	}
 
@@ -184,6 +186,7 @@ class Item {
 	 */
 	public function product_type( $productType ) {
 		$node = new Node('product_type');
+		$brand = $this->safeCharEncodeText( $productType );
 		$this->nodes['product_type'] = $node->value($productType)->_namespace($this->namespace)->addCdata();
 	}
 
