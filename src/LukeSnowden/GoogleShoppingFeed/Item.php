@@ -91,6 +91,7 @@ class Item {
 	 */
 	public function link( $link ) {
 		$node = new Node('link');
+		$link = $this->safeCharEncode( $link );
 		$this->nodes['link'] = $node->value( $link )->addCdata();
 	}
 
@@ -151,6 +152,7 @@ class Item {
 	 */
 	public function image_link( $imageLink ) {
 		$node = new Node('image_link');
+		$imageLink = $this->safeCharEncode( $imageLink );
 		$this->nodes['image_link'] = $node->value( $imageLink )->_namespace($this->namespace)->addCdata();
 	}
 
@@ -315,6 +317,18 @@ class Item {
 		$item = $this->cloneIt();
 		$item->item_group_id( $this->nodes['mpn']->get('value') . '_group' );
 		return $item;
+	}
+
+	/**
+	 * [safeCharEncode description]
+	 * @param  [type] $string [description]
+	 * @return [type]         [description]
+	 */
+	private function safeCharEncode( $string ) {
+		return str_replace(
+			array('[',']','{','}','|',' ','"','<','>','#','%','\\','^','~','`'),
+			array('%5b','%5d','%7b','%7d','%7c','%20','%22','%3c','%3e','%23','%25','%5c','%5e','%7e','%60'),
+		$string );
 	}
 
 }
