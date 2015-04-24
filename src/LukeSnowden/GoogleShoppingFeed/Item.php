@@ -5,67 +5,65 @@ use LukeSnowden\GoogleShoppingFeed\Containers\GoogleShopping;
 
 class Item {
 
-	CONST INSTOCK = 'in stock';
+	CONST INSTOCK 			= 'in stock';
 
-	CONST OUTOFSTOCK = 'out of stock';
+	CONST OUTOFSTOCK 		= 'out of stock';
 
-	CONST PREORDER = 'preorder';
+	CONST PREORDER 			= 'preorder';
 
-	CONST BRANDNEW = 'new';
+	CONST BRANDNEW 			= 'new';
 
-	CONST USED = 'used';
+	CONST USED 				= 'used';
 
-	CONST REFURBISHED = 'refurbished';
+	CONST REFURBISHED 		= 'refurbished';
 
-	CONST MALE = 'male';
+	CONST MALE 				= 'male';
 
-	CONST FEMALE = 'female';
+	CONST FEMALE 			= 'female';
 
-	CONST UNISEX = 'unisex';
+	CONST UNISEX 			= 'unisex';
 
-	CONST NEWBORN = 'newborn';
+	CONST NEWBORN 			= 'newborn';
 
-	CONST INFANT = 'infant';
+	CONST INFANT 			= 'infant';
 
-	CONST TODDLER = 'toddler';
+	CONST TODDLER 			= 'toddler';
 
-	CONST KIDS = 'kids';
+	CONST KIDS 				= 'kids';
 
-	CONST ADULT = 'adult';
+	CONST ADULT 			= 'adult';
 
-	CONST EXTRASMALL = 'XS';
+	CONST EXTRASMALL 		= 'XS';
 
-	CONST SMALL = 'S';
+	CONST SMALL 			= 'S';
 
-	CONST MEDIUM = 'M';
+	CONST MEDIUM 			= 'M';
 
-	CONST LARGE = 'L';
+	CONST LARGE 			= 'L';
 
-	CONST EXTRALARGE = 'XL';
+	CONST EXTRALARGE 		= 'XL';
 
-	CONST EXTRAEXTRALARGE = 'XXL';
+	CONST EXTRAEXTRALARGE 	= 'XXL';
 
 	/**
-	 * [$nodes description]
+	 * [$nodes - Stores all of the product nodes]
 	 * @var array
 	 */
 	private $nodes = array();
 
 	/**
-	 * [$namespace description]
+	 * [$namespace - (g:) namespace definition]
 	 * @var string
 	 */
 	protected $namespace = 'http://base.google.com/ns/1.0';
 
 	/**
-	 * [__construct description]
+	 * [__construct]
 	 */
-	public function __construct() {
-
-	}
+	public function __construct() {}
 
 	/**
-	 * [id description]
+	 * [id - Set the ID of the product]
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
@@ -75,7 +73,7 @@ class Item {
 	}
 
 	/**
-	 * [title description]
+	 * [title - Set the title of the product]
 	 * @param  [type] $title [description]
 	 * @return [type]        [description]
 	 */
@@ -86,7 +84,7 @@ class Item {
 	}
 
 	/**
-	 * [link description]
+	 * [link - Set the link/URL of the product]
 	 * @param  [type] $link [description]
 	 * @return [type]       [description]
 	 */
@@ -97,7 +95,7 @@ class Item {
 	}
 
 	/**
-	 * [price description]
+	 * [price - Set the price of the product, do not format before passing]
 	 * @param  [type] $price [description]
 	 * @return [type]        [description]
 	 */
@@ -107,7 +105,7 @@ class Item {
 	}
 
 	/**
-	 * [sale_price description]
+	 * [sale_price - set the sale price, do not format before passing]
 	 * @param  [type] $salePrice [description]
 	 * @return [type]            [description]
 	 */
@@ -117,7 +115,7 @@ class Item {
 	}
 
 	/**
-	 * [description description]
+	 * [description - Set the description of the product]
 	 * @param  [type] $description [description]
 	 * @return [type]              [description]
 	 */
@@ -128,7 +126,7 @@ class Item {
 	}
 
 	/**
-	 * [condition description]
+	 * [condition - Set the condition of the product (pass in the constants above to standardise the values)]
 	 * @param  [type] $condition [description]
 	 * @return [type]            [description]
 	 */
@@ -330,8 +328,8 @@ class Item {
 	 */
 	private function safeCharEncodeURL( $string ) {
 		return str_replace(
-			array('[',']','{','}','|',' ','"','<','>','#','%','\\','^','~','`'),
-			array('%5b','%5d','%7b','%7d','%7c','%20','%22','%3c','%3e','%23','%25','%5c','%5e','%7e','%60'),
+			array('%','[',']','{','}','|',' ','"','<','>','#','\\','^','~','`'),
+			array('%25','%5b','%5d','%7b','%7d','%7c','%20','%22','%3c','%3e','%23','%5c','%5e','%7e','%60'),
 		$string );
 	}
 
