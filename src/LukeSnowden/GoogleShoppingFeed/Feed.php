@@ -213,4 +213,12 @@ class Feed {
 		return $data;
 	}
 
+	/**
+	 * [removeLastItem description]
+	 * @return [type] [description]
+	 */
+	public function removeLastItem(){
+		array_pop( $this->items );
+	}
+
 }
