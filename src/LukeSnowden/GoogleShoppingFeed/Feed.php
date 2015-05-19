@@ -116,7 +116,17 @@ class Feed {
 		$this->channel();
 		$item = new Item;
 		$this->items[] = $item;
+		$item->setIndex( count($this->items)-1 );
 		return $item;
+	}
+
+	/**
+	 * [removeItemByIndex description]
+	 * @param  [type] $index [description]
+	 * @return [type]        [description]
+	 */
+	public function removeItemByIndex( $index ) {
+		unset( $this->items[$index] );
 	}
 
 	/**

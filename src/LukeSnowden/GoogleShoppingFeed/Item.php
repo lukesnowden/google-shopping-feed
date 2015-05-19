@@ -52,6 +52,12 @@ class Item {
 	private $nodes = array();
 
 	/**
+	 * [$index description]
+	 * @var null
+	 */
+	private $index = null;
+
+	/**
 	 * [$namespace - (g:) namespace definition]
 	 * @var string
 	 */
@@ -281,6 +287,22 @@ class Item {
 	 */
 	public function nodes() {
 		return $this->nodes;
+	}
+
+	/**
+	 * [setIndex description]
+	 * @param [type] $index [description]
+	 */
+	public function setIndex( $index ) {
+		$this->index = $index;
+	}
+
+	/**
+	 * [delete description]
+	 * @return [type] [description]
+	 */
+	public function delete() {
+		GoogleShopping::removeItemByIndex( $this->index );
 	}
 
 	/**
