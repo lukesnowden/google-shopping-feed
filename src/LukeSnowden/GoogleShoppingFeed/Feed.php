@@ -115,8 +115,9 @@ class Feed {
 	public function createItem() {
 		$this->channel();
 		$item = new Item;
-		$this->items[] = $item;
-		$item->setIndex( count($this->items)-1 );
+		$index = 'index_' . md5( microtime() );
+		$this->items[$index] = $item;
+		$item->setIndex( $index ); 
 		return $item;
 	}
 
