@@ -1,6 +1,3 @@
-#Google Shopping Feed API
-
-please note this this is still in development
 
 ###composer
 
