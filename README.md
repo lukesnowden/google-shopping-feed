@@ -36,6 +36,13 @@ foreach( $products as $product ) {
 	$variant->size($variant::LARGE);
 	$variant->color('Red');
 
+	/**
+	 * One thing to note, if creating variants, delete the initial object after you've done, Google no longer needs it!
+	 *
+	 * $item->delete();
+	 *
+	 */
+
 }
 
 // boolean value indicates output to browser
