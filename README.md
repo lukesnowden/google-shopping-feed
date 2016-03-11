@@ -31,7 +31,7 @@ foreach( $products as $product ) {
 	...
 	...
 
-	// create a variant
+	/** create a variant */
 	$variant = $item->variant();
 	$variant->size($variant::LARGE);
 	$variant->color('Red');
