@@ -37,7 +37,8 @@ foreach( $products as $product ) {
 	$variant->color('Red');
 
 	/**
-	 * One thing to note, if creating variants, delete the initial object after you've done, Google no longer needs it!
+	 * One thing to note, if creating variants, delete the initial object after you've done,
+	 * Google no longer needs it!
 	 *
 	 * $item->delete();
 	 *
