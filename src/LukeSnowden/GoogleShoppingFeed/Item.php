@@ -184,6 +184,16 @@ class Item {
 	}
 
 	/**
+	 * [gtin description]
+	 * @param  [type] $gtin [description]
+	 * @return [type]       [description]
+	 */
+	public function gtin( $gtin ) {
+		$node = new Node('gtin');
+		$this->nodes['gtin'] = $node->value($gtin)->_namespace($this->namespace)->addCdata();
+	}
+
+	/**
 	 * [product_type description]
 	 * @param  [type] $productType [description]
 	 * @return [type]              [description]
