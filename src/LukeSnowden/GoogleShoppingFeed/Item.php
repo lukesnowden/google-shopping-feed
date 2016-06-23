@@ -292,6 +292,56 @@ class Item {
 	}
 
 	/**
+	 * [custom_label description]
+	 * @param  [type] $customLabel [description]
+	 * @return [type]           [description]
+	 */
+	public function custom_label_0( $customLabel ) {
+		$node = new Node('custom_label_0');
+		$this->nodes['custom_label_0'] = $node->value($customLabel)->_namespace($this->namespace);
+	}
+
+	/**
+	 * [custom_label_1 description]
+	 * @param  [type] $customLabel [description]
+	 * @return [type]              [description]
+	 */
+	public function custom_label_1( $customLabel ) {
+		$node = new Node('custom_label_1');
+		$this->nodes['custom_label_1'] = $node->value($customLabel)->_namespace($this->namespace);
+	}
+
+	/**
+	 * [custom_label_2 description]
+	 * @param  [type] $customLabel [description]
+	 * @return [type]              [description]
+	 */
+	public function custom_label_2( $customLabel ) {
+		$node = new Node('custom_label_2');
+		$this->nodes['custom_label_2'] = $node->value($customLabel)->_namespace($this->namespace);
+	}
+
+	/**
+	 * [custom_label_3 description]
+	 * @param  [type] $customLabel [description]
+	 * @return [type]              [description]
+	 */
+	public function custom_label_3( $customLabel ) {
+		$node = new Node('custom_label_3');
+		$this->nodes['custom_label_3'] = $node->value($customLabel)->_namespace($this->namespace);
+	}
+
+	/**
+	 * [custom_label_4 description]
+	 * @param  [type] $customLabel [description]
+	 * @return [type]              [description]
+	 */
+	public function custom_label_4( $customLabel ) {
+		$node = new Node('custom_label_4');
+		$this->nodes['custom_label_4'] = $node->value($customLabel)->_namespace($this->namespace);
+	}
+
+	/**
 	 * [nodes description]
 	 * @return [type] [description]
 	 */
