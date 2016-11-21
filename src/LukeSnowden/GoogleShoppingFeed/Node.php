@@ -1,17 +1,18 @@
-<?php namespace LukeSnowden\GoogleShoppingFeed;
+<?php
+
+namespace LukeSnowden\GoogleShoppingFeed;
 
 class Node
 {
-
     /**
      * [$name description]
-     * @var null
+     * @var string
      */
     protected $name = null;
 
     /**
      * [$namespace description]
-     * @var null
+     * @var string
      */
     protected $_namespace = null;
 
@@ -28,8 +29,8 @@ class Node
     protected $cdata = false;
 
     /**
-     * [__construct description]
-     * @param [type] $name [description]
+     * Node constructor.
+     * @param string $name
      */
     public function __construct($name)
     {
@@ -38,9 +39,9 @@ class Node
     }
 
     /**
-     * [namespace description]
-     * @param  [type] $value [description]
-     * @return [type]        [description]
+     * Sets Node namespace
+     * @param string $value
+     * @return $this
      */
     public function _namespace($value)
     {
@@ -49,7 +50,7 @@ class Node
     }
 
     /**
-     * [addCdata description]
+     * @return $this
      */
     public function addCdata()
     {
@@ -58,9 +59,8 @@ class Node
     }
 
     /**
-     * [value description]
-     * @param  [type] $value [description]
-     * @return [type]        [description]
+     * @param mixed $value
+     * @return $this
      */
     public function value($value)
     {
@@ -69,9 +69,8 @@ class Node
     }
 
     /**
-     * [get description]
-     * @param  [type] $key [description]
-     * @return [type]      [description]
+     * @param string $key
+     * @return mixed
      */
     public function get($key)
     {
@@ -79,11 +78,10 @@ class Node
     }
 
     /**
-     * [toXmlNode description]
-     * @param  [type] $parent [description]
-     * @return [type]         [description]
+     * Attachs actual node to a parent node
+     * @param \SimpleXMLElement $parent
      */
-    public function attachNodeTo($parent)
+    public function attachNodeTo(\SimpleXMLElement $parent)
     {
         if ($this->cdata && ! preg_match("#^<!\[CDATA#is", $this->value)) {
             $this->value = "<![CDATA[{$this->value}]]>";

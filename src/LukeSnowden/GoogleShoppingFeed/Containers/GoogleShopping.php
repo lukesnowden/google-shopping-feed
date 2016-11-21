@@ -1,22 +1,21 @@
-<?php namespace LukeSnowden\GoogleShoppingFeed\Containers;
+<?php
+
+namespace LukeSnowden\GoogleShoppingFeed\Containers;
 
 use LukeSnowden\GoogleShoppingFeed\Feed;
 
 class GoogleShopping
 {
-
     /**
-     * [$containers description]
-     * @var array
+     * Feed container
+     * @var Feed
      */
-
     public static $container = null;
 
     /**
-     * [container description]
-     * @return [type] [description]
+     * Return feed container
+     * @return Feed
      */
-
     public static function container()
     {
         if (is_null(static::$container)) {
@@ -27,12 +26,10 @@ class GoogleShopping
     }
 
     /**
-     * [__callStatic description]
-     * @param  [type] $name      [description]
-     * @param  [type] $arguments [description]
-     * @return [type]            [description]
+     * @param string $name
+     * @param array $arguments
+     * @return mixed
      */
-
     public static function __callStatic($name, $arguments)
     {
         return call_user_func_array(array(static::container(), $name), $arguments);

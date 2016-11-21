@@ -1,4 +1,6 @@
-<?php namespace LukeSnowden\GoogleShoppingFeed;
+<?php
+
+namespace LukeSnowden\GoogleShoppingFeed;
 
 use SimpleXMLElement;
 use LukeSnowden\GoogleShoppingFeed\Item;
@@ -8,7 +10,7 @@ class Feed
 {
 
     /**
-     * [$namespace description]
+     * Define Google Namespace url
      * @var string
      */
     protected $namespace = 'http://base.google.com/ns/1.0';
@@ -20,8 +22,8 @@ class Feed
     protected $version = '2.0';
 
     /**
-     * [$items Stores the list of items for the feed]
-     * @var array
+     * Stores the list of items for the feed
+     * @var Item[]
      */
     private $items = array();
 
@@ -32,8 +34,8 @@ class Feed
     private $channelCreated = false;
 
     /**
-     * [$feed The base for the feed]
-     * @var null
+     * The base for the feed
+     * @var SimpleXMLElement
      */
     private $feed = null;
 
@@ -62,7 +64,7 @@ class Feed
     private $link = '';
 
     /**
-     * [__construct description]
+     * Feed constructor
      */
     public function __construct()
     {
@@ -70,38 +72,31 @@ class Feed
     }
 
     /**
-     * [title description]
-     * @param  [type] $string [description]
-     * @return [type]         [description]
+     * @param string $title
      */
-    public function title($string)
+    public function title($title)
     {
-        $this->title = (string)$string;
+        $this->title = (string)$title;
     }
 
     /**
-     * [description description]
-     * @param  [type] $string [description]
-     * @return [type]         [description]
+     * @param string $description
      */
-    public function description($string)
+    public function description($description)
     {
-        $this->description = (string)$string;
+        $this->description = (string)$description;
     }
 
     /**
-     * [link description]
-     * @param  [type] $string [description]
-     * @return [type]         [description]
+     * @param string $link
      */
-    public function link($string)
+    public function link($link)
     {
-        $this->link = (string)$string;
+        $this->link = (string)$link;
     }
 
     /**
      * [channel description]
-     * @return [type] [description]
      */
     private function channel()
     {
@@ -115,8 +110,7 @@ class Feed
     }
 
     /**
-     * [createItem description]
-     * @return [type] [description]
+     * @return Item
      */
     public function createItem()
     {
@@ -129,9 +123,7 @@ class Feed
     }
 
     /**
-     * [removeItemByIndex description]
-     * @param  [type] $index [description]
-     * @return [type]        [description]
+     * @param int $index
      */
     public function removeItemByIndex($index)
     {
@@ -139,9 +131,8 @@ class Feed
     }
 
     /**
-     * [standardiseSizeVarient description]
-     * @param  [type] $value [description]
-     * @return [type]        [description]
+     * @param mixed $value
+     * @return mixed
      */
     public function standardiseSizeVarient($value)
     {
@@ -149,9 +140,8 @@ class Feed
     }
 
     /**
-     * [standardiseSizeVarient description]
-     * @param  [type] $value [description]
-     * @return [type]        [description]
+     * @param mixed $value
+     * @return mixed
      */
     public function standardiseColourVarient($value)
     {
@@ -159,9 +149,8 @@ class Feed
     }
 
     /**
-     * [isVariant description]
-     * @param  [type]  $group [description]
-     * @return boolean        [description]
+     * @param string $group
+     * @return bool|string
      */
     public function isVariant($group)
     {
@@ -178,11 +167,12 @@ class Feed
     }
 
     /**
-     * [addItemsToFeed description]
+     * Adds items to feed
      */
     private function addItemsToFeed()
     {
         foreach ($this->items as $item) {
+            /** @var SimpleXMLElement $feedItemNode */
             $feedItemNode = $this->feed->channel->addChild('item');
             foreach ($item->nodes() as $itemNode) {
                 if (is_array($itemNode)) {
@@ -197,9 +187,8 @@ class Feed
     }
 
     /**
-     * [categories description]
-     * @param  [type] $selected [description]
-     * @return [type]           [description]
+     * Retrieve Google product categories from internet and cache the result
+     * @return array
      */
     public function categories()
     {
@@ -212,9 +201,9 @@ class Feed
     }
 
     /**
-     * [categoriesAsSelect description]
-     * @param  string $selected [description]
-     * @return [type]           [description]
+     * Build an HTML select containing Google taxonomy categories
+     * @param string $selected
+     * @return string
      */
     public function categoriesAsSelect($selected = '')
     {
@@ -230,8 +219,9 @@ class Feed
     }
 
     /**
-     * [asRss description]
-     * @return [type] [description]
+     * Generate RSS feed
+     * @param bool $output
+     * @return string
      */
     public function asRss($output = false)
     {
@@ -246,8 +236,7 @@ class Feed
     }
 
     /**
-     * [removeLastItem description]
-     * @return [type] [description]
+     * Remove last inserted item
      */
     public function removeLastItem()
     {

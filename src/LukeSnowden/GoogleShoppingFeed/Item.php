@@ -1,4 +1,6 @@
-<?php namespace LukeSnowden\GoogleShoppingFeed;
+<?php
+
+namespace LukeSnowden\GoogleShoppingFeed;
 
 use LukeSnowden\GoogleShoppingFeed\Node;
 use LukeSnowden\GoogleShoppingFeed\Containers\GoogleShopping;
@@ -6,55 +8,55 @@ use LukeSnowden\GoogleShoppingFeed\Containers\GoogleShopping;
 class Item
 {
 
-    const INSTOCK            = 'in stock';
+    const INSTOCK         = 'in stock';
 
-    const OUTOFSTOCK        = 'out of stock';
+    const OUTOFSTOCK      = 'out of stock';
 
-    const PREORDER            = 'preorder';
+    const PREORDER        = 'preorder';
 
-    const BRANDNEW            = 'new';
+    const BRANDNEW        = 'new';
 
-    const USED                = 'used';
+    const USED            = 'used';
 
-    const REFURBISHED        = 'refurbished';
+    const REFURBISHED     = 'refurbished';
 
-    const MALE                = 'male';
+    const MALE            = 'male';
 
-    const FEMALE            = 'female';
+    const FEMALE          = 'female';
 
-    const UNISEX            = 'unisex';
+    const UNISEX          = 'unisex';
 
-    const NEWBORN            = 'newborn';
+    const NEWBORN         = 'newborn';
 
-    const INFANT            = 'infant';
+    const INFANT          = 'infant';
 
-    const TODDLER            = 'toddler';
+    const TODDLER         = 'toddler';
 
-    const KIDS                = 'kids';
+    const KIDS            = 'kids';
 
-    const ADULT            = 'adult';
+    const ADULT           = 'adult';
 
-    const EXTRASMALL        = 'XS';
+    const EXTRASMALL      = 'XS';
 
-    const SMALL            = 'S';
+    const SMALL           = 'S';
 
-    const MEDIUM            = 'M';
+    const MEDIUM          = 'M';
 
-    const LARGE            = 'L';
+    const LARGE           = 'L';
 
-    const EXTRALARGE        = 'XL';
+    const EXTRALARGE      = 'XL';
 
-    const EXTRAEXTRALARGE    = 'XXL';
+    const EXTRAEXTRALARGE = 'XXL';
 
     /**
-     * [$nodes - Stores all of the product nodes]
-     * @var array
+     * Stores all of the product nodes
+     * @var Node[]
      */
     private $nodes = array();
 
     /**
-     * [$index description]
-     * @var null
+     * Item index
+     * @var string
      */
     private $index = null;
 
@@ -316,9 +318,7 @@ class Item
     }
 
     /**
-     * [custom_label description]
-     * @param  [type] $customLabel [description]
-     * @return [type]           [description]
+     * @param string $customLabel
      */
     public function custom_label_0($customLabel)
     {
@@ -327,9 +327,7 @@ class Item
     }
 
     /**
-     * [custom_label_1 description]
-     * @param  [type] $customLabel [description]
-     * @return [type]              [description]
+     * @param string $customLabel
      */
     public function custom_label_1($customLabel)
     {
@@ -338,9 +336,7 @@ class Item
     }
 
     /**
-     * [custom_label_2 description]
-     * @param  [type] $customLabel [description]
-     * @return [type]              [description]
+     * @param string $customLabel
      */
     public function custom_label_2($customLabel)
     {
@@ -349,9 +345,7 @@ class Item
     }
 
     /**
-     * [custom_label_3 description]
-     * @param  [type] $customLabel [description]
-     * @return [type]              [description]
+     * @param string $customLabel
      */
     public function custom_label_3($customLabel)
     {
@@ -360,9 +354,7 @@ class Item
     }
 
     /**
-     * [custom_label_4 description]
-     * @param  [type] $customLabel [description]
-     * @return [type]              [description]
+     * @param string $customLabel
      */
     public function custom_label_4($customLabel)
     {
@@ -371,8 +363,8 @@ class Item
     }
 
     /**
-     * [nodes description]
-     * @return [type] [description]
+     * Returns item nodes
+     * @return array
      */
     public function nodes()
     {
@@ -380,8 +372,8 @@ class Item
     }
 
     /**
-     * [setIndex description]
-     * @param [type] $index [description]
+     * Sets item index
+     * @param $index
      */
     public function setIndex($index)
     {
@@ -389,8 +381,7 @@ class Item
     }
 
     /**
-     * [delete description]
-     * @return [type] [description]
+     * Delete an item
      */
     public function delete()
     {
@@ -398,11 +389,12 @@ class Item
     }
 
     /**
-     * [clone description]
-     * @return [type] [description]
+     * Clones an item
+     * @return Item
      */
     public function cloneIt()
     {
+        /** @var Item $item */
         $item = GoogleShopping::createItem();
         $this->item_group_id($this->nodes['mpn']->get('value') . '_group');
         foreach ($this->nodes as $node) {
@@ -426,20 +418,20 @@ class Item
     }
 
     /**
-     * [variant description]
-     * @return [type] [description]
+     * Create an item variant
+     * @return mixed
      */
     public function variant()
     {
+        /** @var Item $item */
         $item = $this->cloneIt();
         $item->item_group_id($this->nodes['mpn']->get('value') . '_group');
         return $item;
     }
 
     /**
-     * [safeCharEncode description]
-     * @param  [type] $string [description]
-     * @return [type]         [description]
+     * @param string $string
+     * @return string
      */
     private function safeCharEncodeURL($string)
     {
@@ -450,9 +442,8 @@ class Item
     }
 
     /**
-     * [safeCharEncodeText description]
-     * @param  [type] $string [description]
-     * @return [type]         [description]
+     * @param string $string
+     * @return string
      */
     private function safeCharEncodeText($string)
     {
