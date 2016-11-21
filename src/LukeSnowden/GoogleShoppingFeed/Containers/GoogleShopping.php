@@ -1,40 +1,37 @@
-<?php namespace LukeSnowden\GoogleShoppingFeed\Containers;
+<?php
+
+namespace LukeSnowden\GoogleShoppingFeed\Containers;
 
 use LukeSnowden\GoogleShoppingFeed\Feed;
 
 class GoogleShopping
 {
+    /**
+     * Feed container
+     * @var Feed
+     */
+    public static $container = null;
 
-	/**
-	 * [$containers description]
-	 * @var array
-	 */
+    /**
+     * Return feed container
+     * @return Feed
+     */
+    public static function container()
+    {
+        if (is_null(static::$container)) {
+            static::$container = new Feed;
+        }
 
-	public static $container = null;
+        return static::$container;
+    }
 
-	/**
-	 * [container description]
-	 * @return [type] [description]
-	 */
-
-	public static function container()
-	{
-		if ( is_null( static::$container ) ) {
-			static::$container = new Feed;
-		}
-		return static::$container;
-	}
-
-	/**
-	 * [__callStatic description]
-	 * @param  [type] $name      [description]
-	 * @param  [type] $arguments [description]
-	 * @return [type]            [description]
-	 */
-
-	public static function __callStatic( $name, $arguments )
-	{
-		return call_user_func_array( array( static::container(), $name ), $arguments );
-	}
-
+    /**
+     * @param string $name
+     * @param array $arguments
+     * @return mixed
+     */
+    public static function __callStatic($name, $arguments)
+    {
+        return call_user_func_array(array(static::container(), $name), $arguments);
+    }
 }
