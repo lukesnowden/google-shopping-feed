@@ -186,7 +186,7 @@ class Feed {
 	public function categories() {
 		$cache = new Cache;
 		$cache->setCacheDirectory($this->cacheDir);
-		$data = $cache->getOrCreate('google-feed-taxonomy.txt', array( 'max-age' => '860400' ), function() {
+		$data = $cache->getOrCreate('google-feed-taxonomy.txt', array( 'max-age' => '86400' ), function() {
 		    return file_get_contents("http://www.google.com/basepages/producttype/taxonomy.en-GB.txt");
 		});
 		return explode( "\n", trim($data) );
