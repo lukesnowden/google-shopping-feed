@@ -4,6 +4,7 @@ namespace LukeSnowden\GoogleShoppingFeed;
 
 use LukeSnowden\GoogleShoppingFeed\Node;
 use LukeSnowden\GoogleShoppingFeed\Containers\GoogleShopping;
+use LukeSnowden\GoogleShoppingFeed\Exceptions\MissingIdentifierException;
 
 class Item
 {
@@ -389,14 +390,28 @@ class Item
     }
 
     /**
+     * [checkForIdentificationProperties description]
+     * @return [type] [description]
+     */
+    protected function getGroupIdentifier()
+    {
+        if( ! isset( $this->nodes['mpn'] ) && ! isset( $this->nodes['gtin'] ) ) {
+            throw new MissingIdentifierException("Please define a GTIN or MPN value before create a vartent");
+        }
+        if( isset( $this->nodes['mpn'] ) ) return $this->nodes['mpn']->get('value') . '_group';
+        return $this->nodes['gtin']->get('value') . '_group';
+    }
+
+    /**
      * Clones an item
      * @return Item
      */
     public function cloneIt()
     {
+       $groupIdentifiers = $this->getGroupIdentifier();
         /** @var Item $item */
         $item = GoogleShopping::createItem();
-        $this->item_group_id($this->nodes['mpn']->get('value') . '_group');
+        $this->item_group_id( $groupIdentifiers );
         foreach ($this->nodes as $node) {
             if (is_array($node)) {
                 // multiple accepted values..
@@ -425,7 +440,7 @@ class Item
     {
         /** @var Item $item */
         $item = $this->cloneIt();
-        $item->item_group_id($this->nodes['mpn']->get('value') . '_group');
+        $item->item_group_id( $this->getGroupIdentifier() );
         return $item;
     }
 
