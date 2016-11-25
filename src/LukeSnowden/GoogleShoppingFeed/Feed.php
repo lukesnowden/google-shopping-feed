@@ -188,26 +188,60 @@ class Feed
 
     /**
      * Retrieve Google product categories from internet and cache the result
+     * @param string $languageISO639
      * @return array
      */
-    public function categories()
+    public function categories($languageISO639 = 'gb')
     {
+        //map two letter language to culture
+        $languageMap = array(
+            'au' => 'en-AU',
+            'br' => 'pt-BR',
+            'cn' => 'zh-CN',
+            'cz' => 'cs-CZ',
+            'de' => 'de-DE',
+            'dk' => 'da-DK',
+            'es' => 'es-ES',
+            'fr' => 'fr-FR',
+            'gb' => 'en-GB',
+            'it' => 'it-IT',
+            'jp' => 'ja-JP',
+            'nl' => 'nl-NL',
+            'no' => 'no-NO',
+            'pl' => 'pl-PL',
+            'ru' => 'ru-RU',
+            'sw' => 'sv-SE',
+            'tr' => 'tr-TR',
+            'us' => 'en-US'
+        );
+        //set default language to gb for backward compatibility
+        $languageCulture = $languageMap['gb'];
+        if (array_key_exists($languageISO639, $languageMap)) {
+            $languageCulture = $languageMap[$languageISO639];
+        }
+
+        var_dump($languageISO639, $languageCulture);
+
         $cache = new Cache;
         $cache->setCacheDirectory($this->cacheDir);
-        $data = $cache->getOrCreate('google-feed-taxonomy.txt', array( 'max-age' => '86400' ), function () {
-            return file_get_contents("http://www.google.com/basepages/producttype/taxonomy.en-GB.txt");
-        });
+        $data = $cache->getOrCreate('google-feed-taxonomy.'.$languageISO639.'.txt', array('max-age' => '86400'),
+            function () use ($languageCulture) {
+                return file_get_contents("http://www.google.com/basepages/producttype/taxonomy." . $languageCulture . ".txt");
+            }
+        );
+
         return explode("\n", trim($data));
     }
 
     /**
      * Build an HTML select containing Google taxonomy categories
      * @param string $selected
+     * @param string $languageISO639
      * @return string
      */
-    public function categoriesAsSelect($selected = '')
+    public function categoriesAsSelect($selected = '', $languageISO639 = 'gb')
     {
-        $categories = $this->categories();
+        $categories = $this->categories($languageISO639);
         unset($categories[0]);
         $select = '<select name="google_category">';
         $select .= '<option value="">Please select a Google Category</option>';
