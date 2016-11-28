@@ -212,6 +212,18 @@ class Item
     }
 
     /**
+     * [gtin identifier]
+     * @param  [type] $identifier   [description]
+     * @return [type]               [description]
+     */
+    public function identifier_​exists($identifier)
+    {
+        $node = new Node('identifier_exists');
+        $this->nodes['identifier_exists'] = $node->value($identifier)->_namespace($this->namespace);
+    }
+
+
+    /**
      * [product_type description]
      * @param  [type] $productType [description]
      * @return [type]              [description]
