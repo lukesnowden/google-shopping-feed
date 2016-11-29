@@ -138,7 +138,7 @@ class Item
      */
     public function description($description)
     {
-        $description = preg_replace( "#<iframe[^>]+>.*?</iframe>#is", '', $description );
+        $description = preg_replace( "#<iframe[^>]+>[^<]?</iframe>#is", '', $description );
         $node = new Node('description');
         $description = $this->safeCharEncodeText($description);
         $this->nodes['description'] = $node->value(substr($description, 0, 5000))->_namespace($this->namespace)->addCdata();
