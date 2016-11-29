@@ -212,6 +212,7 @@ class Item
     }
 
     /**
+<<<<<<< HEAD
      * [is_bundle description]
      * @param  [type]  $bundle [description]
      * @return boolean         [description]
@@ -221,6 +222,19 @@ class Item
         $this->nodes['is_bundle'] = $node->value($bundle)->_namespace($this->namespace);        
     }
 
+=======
+     * [gtin identifier]
+     * @param  [type] $identifier   [description]
+     * @return [type]               [description]
+     */
+    public function identifier_​exists($identifier)
+    {
+        $node = new Node('identifier_exists');
+        $this->nodes['identifier_exists'] = $node->value($identifier)->_namespace($this->namespace);
+    }
+
+
+>>>>>>> origin/master
     /**
      * [product_type description]
      * @param  [type] $productType [description]
