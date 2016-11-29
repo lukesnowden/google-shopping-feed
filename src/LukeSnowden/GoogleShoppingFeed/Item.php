@@ -285,7 +285,7 @@ class Item
     public function size($size)
     {
         $node = new Node('size');
-        $this->nodes['size'] = $node->value($size)->_namespace($this->namespace);
+        $this->nodes['size'] = $node->value($size)->_namespace($this->namespace)->addCdata();
     }
 
     /**
@@ -296,7 +296,7 @@ class Item
     public function gender($gender)
     {
         $node = new Node('gender');
-        $this->nodes['gender'] = $node->value($gender)->_namespace($this->namespace);
+        $this->nodes['gender'] = $node->value($gender)->_namespace($this->namespace)->addCdata();
     }
 
     /**
@@ -307,7 +307,7 @@ class Item
     public function age_group($ageGroup)
     {
         $node = new Node('age_group');
-        $this->nodes['age_group'] = $node->value($ageGroup)->_namespace($this->namespace);
+        $this->nodes['age_group'] = $node->value($ageGroup)->_namespace($this->namespace)->addCdata();
     }
 
     /**
@@ -318,7 +318,7 @@ class Item
     public function color($color)
     {
         $node = new Node('color');
-        $this->nodes['color'] = $node->value($color)->_namespace($this->namespace);
+        $this->nodes['color'] = $node->value($color)->_namespace($this->namespace)->addCdata();
     }
 
     /**
@@ -477,8 +477,8 @@ class Item
     private function safeCharEncodeText($string)
     {
         return str_replace(
-            array('•', '”', '“', '’', '‘', '™', '®', '°'),
-            array('&#8226;', '&#8221;', '&#8220;', '&#8217;', '&#8216;', '&trade;', '&reg;', '&deg;'),
+            array('•', '”', '“', '’', '‘', '™', '®', '°', "\n"),
+            array('&#8226;', '&#8221;', '&#8220;', '&#8217;', '&#8216;', '&trade;', '&reg;', '&deg;', ''),
         $string);
     }
 }
