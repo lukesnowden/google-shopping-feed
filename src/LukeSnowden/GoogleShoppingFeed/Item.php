@@ -212,6 +212,16 @@ class Item
     }
 
     /**
+     * [is_bundle description]
+     * @param  [type]  $bundle [description]
+     * @return boolean         [description]
+     */
+    public function is_bundle($bundle) {
+        $node = new Node('is_bundle');
+        $this->nodes['is_bundle'] = $node->value($bundle)->_namespace($this->namespace);        
+    }
+
+    /**
      * [product_type description]
      * @param  [type] $productType [description]
      * @return [type]              [description]
