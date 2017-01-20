@@ -259,7 +259,7 @@ class Feed
      */
     public function asRss($output = false)
     {
-        ob_end_clean();
+        if (ob_get_contents()) ob_end_clean();
         $this->addItemsToFeed();
         $data = html_entity_decode($this->feed->asXml());
         if ($output) {
