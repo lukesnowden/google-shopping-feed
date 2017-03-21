@@ -222,7 +222,7 @@ class Item
         $this->nodes['is_bundle'] = $node->value($bundle)->_namespace($this->namespace);
     }
 
-    public function identifier_​exists($identifier) {
+    public function identifier_exists($identifier) {
         $node = new Node('identifier_exists');
         $this->nodes['identifier_exists'] = $node->value($identifier)->_namespace($this->namespace);
     }
@@ -502,8 +502,8 @@ class Item
      */
     public function additional_image_link($imageLink)
     {
-        $node = new Node('additional_​image_​link');
+        $node = new Node('additional_image_link');
         $imageLink = $this->safeCharEncodeURL($imageLink);
-        $this->nodes['additional_​image_​link'] = $node->value($imageLink)->_namespace($this->namespace)->addCdata();
+        $this->nodes['additional_image_link'] = $node->value($imageLink)->_namespace($this->namespace)->addCdata();
     }
 }
