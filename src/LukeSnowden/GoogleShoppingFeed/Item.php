@@ -219,7 +219,7 @@ class Item
      */
     public function is_bundle($bundle) {
         $node = new Node('is_bundle');
-        $this->nodes['is_bundle'] = $node->value($bundle)->_namespace($this->namespace);        
+        $this->nodes['is_bundle'] = $node->value($bundle)->_namespace($this->namespace);
     }
 
     public function identifier_​exists($identifier) {
@@ -266,12 +266,18 @@ class Item
      * @param  [type] $code    [description]
      * @param  [type] $service [description]
      * @param  [type] $cost    [description]
+     * @param  [type] $region  [description]
      * @return [type]          [description]
      */
-    public function shipping($code, $service, $cost)
+    public function shipping($code, $service, $cost, $region = null)
     {
         $node = new Node('shipping');
         $value = "<g:country>{$code}</g:country><g:service>{$service}</g:service><g:price>{$cost}</g:price>";
+
+        if($region) {
+          $value .= "<g:region>{$region}</g:region>";
+        }
+
         if (! isset($this->nodes['shipping'])) {
             $this->nodes['shipping'] = array();
         }
