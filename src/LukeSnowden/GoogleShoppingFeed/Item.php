@@ -488,4 +488,22 @@ class Item
             array('&#8226;', '&#8221;', '&#8220;', '&#8217;', '&#8216;', '&trade;', '&reg;', '&deg;', ''),
         $string);
     }
+
+    /**
+     * @param $material
+     */
+    public function material($material) {
+        $node = new Node('material');
+        $this->nodes['material'] = $node->value($material)->_namespace($this->namespace);
+    }
+
+    /**
+     * @param $imageLink
+     */
+    public function additional_image_link($imageLink)
+    {
+        $node = new Node('additional_​image_​link');
+        $imageLink = $this->safeCharEncodeURL($imageLink);
+        $this->nodes['additional_​image_​link'] = $node->value($imageLink)->_namespace($this->namespace)->addCdata();
+    }
 }
