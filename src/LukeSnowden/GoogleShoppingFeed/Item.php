@@ -222,7 +222,7 @@ class Item
         $this->nodes['is_bundle'] = $node->value($bundle)->_namespace($this->namespace);
     }
 
-    public function identifier_​exists($identifier) {
+    public function identifier_exists($identifier) {
         $node = new Node('identifier_exists');
         $this->nodes['identifier_exists'] = $node->value($identifier)->_namespace($this->namespace);
     }
@@ -487,5 +487,23 @@ class Item
             array('•', '”', '“', '’', '‘', '™', '®', '°', "\n"),
             array('&#8226;', '&#8221;', '&#8220;', '&#8217;', '&#8216;', '&trade;', '&reg;', '&deg;', ''),
         $string);
+    }
+
+    /**
+     * @param $material
+     */
+    public function material($material) {
+        $node = new Node('material');
+        $this->nodes['material'] = $node->value($material)->_namespace($this->namespace);
+    }
+
+    /**
+     * @param $imageLink
+     */
+    public function additional_image_link($imageLink)
+    {
+        $node = new Node('additional_image_link');
+        $imageLink = $this->safeCharEncodeURL($imageLink);
+        $this->nodes['additional_image_link'] = $node->value($imageLink)->_namespace($this->namespace)->addCdata();
     }
 }
