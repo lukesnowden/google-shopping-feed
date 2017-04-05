@@ -220,8 +220,6 @@ class Feed
             $languageCulture = $languageMap[$languageISO639];
         }
 
-        var_dump($languageISO639, $languageCulture);
-
         $cache = new Cache;
         $cache->setCacheDirectory($this->cacheDir);
         $data = $cache->getOrCreate('google-feed-taxonomy.'.$languageISO639.'.txt', array('max-age' => '86400'),
