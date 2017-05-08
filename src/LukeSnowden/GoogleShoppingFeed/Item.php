@@ -174,7 +174,7 @@ class Item
     public function image_link($imageLink)
     {
         $node = new Node('image_link');
-        $imageLink = $this->safeCharEncodeURL($imageLink);
+        $imageLink = $this->safeCharEncodeURL(urldecode($imageLink));
         $this->nodes['image_link'] = $node->value($imageLink)->_namespace($this->namespace)->addCdata();
     }
 
@@ -503,7 +503,7 @@ class Item
     public function additional_image_link($imageLink)
     {
         $node = new Node('additional_image_link');
-        $imageLink = $this->safeCharEncodeURL($imageLink);
+        $imageLink = $this->safeCharEncodeURL(urldecode($imageLink));
         $this->nodes['additional_image_link'] = $node->value($imageLink)->_namespace($this->namespace)->addCdata();
     }
 }
