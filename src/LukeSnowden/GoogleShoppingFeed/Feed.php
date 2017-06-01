@@ -102,9 +102,9 @@ class Feed
     {
         if (! $this->channelCreated) {
             $channel = $this->feed->addChild('channel');
-            $channel->addChild('title', $this->title);
-            $channel->addChild('link', $this->link);
-            $channel->addChild('description', $this->description);
+            $channel->addChild('title', htmlspecialchars($this->title));
+            $channel->addChild('link', htmlspecialchars($this->link));
+            $channel->addChild('description', htmlspecialchars($this->description));
             $this->channelCreated = true;
         }
     }
@@ -177,7 +177,7 @@ class Feed
             foreach ($item->nodes() as $itemNode) {
                 if (is_array($itemNode)) {
                     foreach ($itemNode as $node) {
-                        $feedItemNode->addChild($node->get('name'), $node->get('value'), $node->get('_namespace'));
+                        $feedItemNode->addChild($node->get('name'), htmlspecialchars($node->get('value')), $node->get('_namespace'));
                     }
                 } else {
                     $itemNode->attachNodeTo($feedItemNode);
