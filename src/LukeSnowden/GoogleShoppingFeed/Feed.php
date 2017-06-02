@@ -177,7 +177,7 @@ class Feed
             foreach ($item->nodes() as $itemNode) {
                 if (is_array($itemNode)) {
                     foreach ($itemNode as $node) {
-                        $feedItemNode->addChild($node->get('name'), htmlspecialchars($node->get('value')), $node->get('_namespace'));
+                        $feedItemNode->addChild($node->get('name'), $node->get('value'), $node->get('_namespace'));
                     }
                 } else {
                     $itemNode->attachNodeTo($feedItemNode);
