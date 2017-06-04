@@ -102,9 +102,9 @@ class Feed
     {
         if (! $this->channelCreated) {
             $channel = $this->feed->addChild('channel');
-            $channel->addChild('title', $this->title);
-            $channel->addChild('link', $this->link);
-            $channel->addChild('description', $this->description);
+            $channel->addChild('title', htmlspecialchars($this->title));
+            $channel->addChild('link', htmlspecialchars($this->link));
+            $channel->addChild('description', htmlspecialchars($this->description));
             $this->channelCreated = true;
         }
     }
