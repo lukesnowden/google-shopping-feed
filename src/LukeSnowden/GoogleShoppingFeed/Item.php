@@ -262,6 +262,17 @@ class Item
     }
 
     /**
+     * [availability_date description]
+     *
+     * @param  [type] $availability [description]
+     */
+    public function availability_date($availabilityDate)
+    {
+        $node = new Node('availability_date');
+        $this->nodes['availability_date'] = $node->value($availabilityDate)->_namespace($this->namespace)->addCdata();
+    }
+
+    /**
      * [shipping description]
      * @param  [type] $code    [description]
      * @param  [type] $service [description]
