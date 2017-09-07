@@ -396,6 +396,18 @@ class Item
     }
 
     /**
+     * Adds a custom attribute to the shopping feed.
+     *
+     * @param string $name
+     * @param string $value
+     */
+    public function custom($name, $value)
+    {
+        $node = new Node($name);
+        $this->nodes[$name] = $node->value($value);
+    }
+
+    /**
      * Returns item nodes
      * @return array
      */
