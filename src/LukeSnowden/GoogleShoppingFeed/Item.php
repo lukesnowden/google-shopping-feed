@@ -404,7 +404,7 @@ class Item
     public function custom($name, $value)
     {
         $node = new Node($name);
-        $this->nodes[] = $node->value($value)->_namespace($this->namespace);
+        $this->nodes[$name] = $node->value($value)->_namespace($this->namespace);
     }
 
     /**
