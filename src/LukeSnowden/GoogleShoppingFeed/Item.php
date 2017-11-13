@@ -110,14 +110,15 @@ class Item
     }
 
     /**
-     * [price - Set the price of the product, do not format before passing]
-     * @param  [type] $price [description]
-     * @return [type]        [description]
+     * price - Set the price of the product, do not format before passing
+     * @param $price
      */
     public function price($price)
     {
         $node = new Node('price');
-        $this->nodes['price'] = $node->value(number_format($price, 2, '.', ''))->_namespace($this->namespace);
+        $price = number_format($price, 2, '.', '');
+        $code = GoogleShopping::getIso4217CountryCode();
+        $this->nodes['price'] = $node->value( $price . " {$code}" )->_namespace($this->namespace);
     }
 
     /**

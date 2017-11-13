@@ -16,10 +16,14 @@ class Feed
     protected $namespace = 'http://base.google.com/ns/1.0';
 
     /**
-     * [$version description]
      * @var string
      */
     protected $version = '2.0';
+
+    /**
+     * @var string
+     */
+    protected $iso4217CountryCode = 'GBP';
 
     /**
      * Stores the list of items for the feed
@@ -28,8 +32,7 @@ class Feed
     private $items = array();
 
     /**
-     * [$channelCreated description]
-     * @var boolean
+     * @var bool
      */
     private $channelCreated = false;
 
@@ -40,25 +43,21 @@ class Feed
     private $feed = null;
 
     /**
-     * [$title description]
      * @var string
      */
     private $title = '';
 
     /**
-     * [$cacheDir description]
      * @var string
      */
     private $cacheDir = 'cache';
 
     /**
-     * [$description description]
      * @var string
      */
     private $description = '';
 
     /**
-     * [$link description]
      * @var string
      */
     private $link = '';
@@ -93,6 +92,22 @@ class Feed
     public function link($link)
     {
         $this->link = (string)$link;
+    }
+
+    /**
+     * @param $code
+     */
+    public function setIso4217CountryCode( $code )
+    {
+        $this->iso4217CountryCode = $code;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIso4217CountryCode()
+    {
+        return $this->iso4217CountryCode;
     }
 
     /**
