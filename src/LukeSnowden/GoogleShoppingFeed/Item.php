@@ -522,6 +522,14 @@ class Item
         $this->nodes['material'] = $node->value($material)->_namespace($this->namespace);
     }
 
+     /**
+     * @param $pattern
+     */
+    public function pattern($pattern) {
+        $node = new Node('pattern');
+        $this->nodes['pattern'] = $node->value($pattern)->_namespace($this->namespace);
+    }
+    
     /**
      * @param $imageLink
      */
