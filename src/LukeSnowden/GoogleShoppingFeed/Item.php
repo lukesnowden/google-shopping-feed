@@ -124,12 +124,13 @@ class Item
     /**
      * [sale_price - set the sale price, do not format before passing]
      * @param  [type] $salePrice [description]
-     * @return [type]            [description]
      */
     public function sale_price($salePrice)
     {
         $node = new Node('sale_price');
-        $this->nodes['sale_price'] = $node->value(number_format($salePrice, 2, '.', ''))->_namespace($this->namespace);
+        $salePrice = number_format($salePrice, 2, '.', '');
+        $code = GoogleShopping::getIso4217CountryCode();
+        $this->nodes['sale_price'] = $node->value( $salePrice . " {$code}" )->_namespace($this->namespace);
     }
 
     /**
@@ -521,6 +522,14 @@ class Item
         $this->nodes['material'] = $node->value($material)->_namespace($this->namespace);
     }
 
+     /**
+     * @param $pattern
+     */
+    public function pattern($pattern) {
+        $node = new Node('pattern');
+        $this->nodes['pattern'] = $node->value($pattern)->_namespace($this->namespace);
+    }
+    
     /**
      * @param $imageLink
      */
