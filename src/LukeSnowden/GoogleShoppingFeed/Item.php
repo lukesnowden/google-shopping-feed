@@ -124,12 +124,13 @@ class Item
     /**
      * [sale_price - set the sale price, do not format before passing]
      * @param  [type] $salePrice [description]
-     * @return [type]            [description]
      */
     public function sale_price($salePrice)
     {
         $node = new Node('sale_price');
-        $this->nodes['sale_price'] = $node->value(number_format($salePrice, 2, '.', ''))->_namespace($this->namespace);
+        $salePrice = number_format($salePrice, 2, '.', '');
+        $code = GoogleShopping::getIso4217CountryCode();
+        $this->nodes['sale_price'] = $node->value( $salePrice . " {$code}" )->_namespace($this->namespace);
     }
 
     /**
