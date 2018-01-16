@@ -51,7 +51,7 @@ class Item
 
     /**
      * Stores all of the product nodes
-     * @var Node[]
+     * @var Node
      */
     private $nodes = array();
 
@@ -68,16 +68,7 @@ class Item
     protected $namespace = 'http://base.google.com/ns/1.0';
 
     /**
-     * [__construct]
-     */
-    public function __construct()
-    {
-    }
-
-    /**
-     * [id - Set the ID of the product]
-     * @param  [type] $id [description]
-     * @return [type]     [description]
+     * @param $id
      */
     public function id($id)
     {
@@ -86,9 +77,7 @@ class Item
     }
 
     /**
-     * [title - Set the title of the product]
-     * @param  [type] $title [description]
-     * @return [type]        [description]
+     * @param $title
      */
     public function title($title)
     {
@@ -98,9 +87,7 @@ class Item
     }
 
     /**
-     * [link - Set the link/URL of the product]
-     * @param  [type] $link [description]
-     * @return [type]       [description]
+     * @param $link
      */
     public function link($link)
     {
@@ -110,11 +97,12 @@ class Item
     }
 
     /**
-     * price - Set the price of the product, do not format before passing
      * @param $price
      */
     public function price($price)
     {
+        /** @var $price - Added hack in for when the variants are being created it passes over the new ISO currency code which breaks number_format */
+        $price = (float) preg_replace( "/^([0-9]+\.?[0-9]*)(\s[A-Z]{3})$/", "$1", $price );
         $node = new Node('price');
         $price = number_format($price, 2, '.', '');
         $code = GoogleShopping::getIso4217CountryCode();
@@ -122,11 +110,12 @@ class Item
     }
 
     /**
-     * [sale_price - set the sale price, do not format before passing]
-     * @param  [type] $salePrice [description]
+     * @param $salePrice
      */
     public function sale_price($salePrice)
     {
+        /** @var $salePrice - Added hack in for when the variants are being created it passes over the new ISO currency code which breaks number_format */
+        $salePrice = (float) preg_replace( "/^([0-9]+\.?[0-9]*)(\s[A-Z]{3})$/", "$1", $salePrice );
         $node = new Node('sale_price');
         $salePrice = number_format($salePrice, 2, '.', '');
         $code = GoogleShopping::getIso4217CountryCode();
@@ -134,9 +123,7 @@ class Item
     }
 
     /**
-     * [description - Set the description of the product]
-     * @param  [type] $description [description]
-     * @return [type]              [description]
+     * @param $description
      */
     public function description($description)
     {
@@ -147,9 +134,7 @@ class Item
     }
 
     /**
-     * [condition - Set the condition of the product (pass in the constants above to standardise the values)]
-     * @param  [type] $condition [description]
-     * @return [type]            [description]
+     * @param $condition
      */
     public function condition($condition)
     {
@@ -158,9 +143,7 @@ class Item
     }
 
     /**
-     * [expiration_date description]
-     * @param  [type] $expirationDate [description]
-     * @return [type]                 [description]
+     * @param $expirationDate
      */
     public function expiration_date($expirationDate)
     {
@@ -169,9 +152,7 @@ class Item
     }
 
     /**
-     * [image_link description]
-     * @param  [type] $imageLink [description]
-     * @return [type]            [description]
+     * @param $imageLink
      */
     public function image_link($imageLink)
     {
@@ -181,9 +162,7 @@ class Item
     }
 
     /**
-     * [brand description]
-     * @param  [type] $brand [description]
-     * @return [type]        [description]
+     * @param $brand
      */
     public function brand($brand)
     {
@@ -193,9 +172,7 @@ class Item
     }
 
     /**
-     * [mpn description]
-     * @param  [type] $mnp [description]
-     * @return [type]      [description]
+     * @param $mpn
      */
     public function mpn($mpn)
     {
@@ -204,9 +181,7 @@ class Item
     }
 
     /**
-     * [gtin description]
-     * @param  [type] $gtin [description]
-     * @return [type]       [description]
+     * @param $gtin
      */
     public function gtin($gtin)
     {
@@ -219,20 +194,23 @@ class Item
      * @param  [type]  $bundle [description]
      * @return boolean         [description]
      */
-    public function is_bundle($bundle) {
+    public function is_bundle($bundle)
+    {
         $node = new Node('is_bundle');
         $this->nodes['is_bundle'] = $node->value($bundle)->_namespace($this->namespace);
     }
 
-    public function identifier_exists($identifier) {
+    /**
+     * @param $identifier
+     */
+    public function identifier_exists($identifier)
+    {
         $node = new Node('identifier_exists');
         $this->nodes['identifier_exists'] = $node->value($identifier)->_namespace($this->namespace);
     }
 
     /**
-     * [product_type description]
-     * @param  [type] $productType [description]
-     * @return [type]              [description]
+     * @param $productType
      */
     public function product_type($productType)
     {
@@ -242,9 +220,7 @@ class Item
     }
 
     /**
-     * [google_product_category description]
-     * @param  [type] $googleProductCategory [description]
-     * @return [type]                        [description]
+     * @param $googleProductCategory
      */
     public function google_product_category($googleProductCategory)
     {
@@ -253,9 +229,7 @@ class Item
     }
 
     /**
-     * [availability description]
-     * @param  [type] $availability [description]
-     * @return [type]               [description]
+     * @param $availability
      */
     public function availability($availability)
     {
@@ -264,9 +238,7 @@ class Item
     }
 
     /**
-     * [availability_date description]
-     *
-     * @param  [type] $availability [description]
+     * @param $availabilityDate
      */
     public function availability_date($availabilityDate)
     {
@@ -275,12 +247,10 @@ class Item
     }
 
     /**
-     * [shipping description]
-     * @param  [type] $code    [description]
-     * @param  [type] $service [description]
-     * @param  [type] $cost    [description]
-     * @param  [type] $region  [description]
-     * @return [type]          [description]
+     * @param $code
+     * @param $service
+     * @param $cost
+     * @param null $region
      */
     public function shipping($code, $service, $cost, $region = null)
     {
@@ -298,9 +268,7 @@ class Item
     }
 
     /**
-     * [size description]
-     * @param  [type] $size [description]
-     * @return [type]       [description]
+     * @param $size
      */
     public function size($size)
     {
@@ -309,9 +277,7 @@ class Item
     }
 
     /**
-     * [gender description]
-     * @param  [type] $gender [description]
-     * @return [type]         [description]
+     * @param $gender
      */
     public function gender($gender)
     {
@@ -320,9 +286,7 @@ class Item
     }
 
     /**
-     * [age_group description]
-     * @param  [type] $ageGroup [description]
-     * @return [type]           [description]
+     * @param $ageGroup
      */
     public function age_group($ageGroup)
     {
@@ -331,9 +295,7 @@ class Item
     }
 
     /**
-     * [color description]
-     * @param  [type] $color [description]
-     * @return [type]        [description]
+     * @param $color
      */
     public function color($color)
     {
@@ -342,9 +304,7 @@ class Item
     }
 
     /**
-     * [item_group_id description]
-     * @param  [type] $id [description]
-     * @return [type]     [description]
+     * @param $id
      */
     public function item_group_id($id)
     {
@@ -436,8 +396,8 @@ class Item
     }
 
     /**
-     * [checkForIdentificationProperties description]
-     * @return [type] [description]
+     * @return string
+     * @throws MissingIdentifierException
      */
     protected function getGroupIdentifier()
     {
@@ -517,7 +477,8 @@ class Item
     /**
      * @param $material
      */
-    public function material($material) {
+    public function material($material)
+    {
         $node = new Node('material');
         $this->nodes['material'] = $node->value($material)->_namespace($this->namespace);
     }
@@ -525,7 +486,8 @@ class Item
      /**
      * @param $pattern
      */
-    public function pattern($pattern) {
+    public function pattern($pattern)
+    {
         $node = new Node('pattern');
         $this->nodes['pattern'] = $node->value($pattern)->_namespace($this->namespace);
     }
