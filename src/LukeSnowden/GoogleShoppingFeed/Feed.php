@@ -266,6 +266,21 @@ class Feed
     }
 
     /**
+     * @param string $languageISO639
+     * @return array
+     */
+    public function categoriesAsNameAssociativeArray( $languageISO639 = 'gb' )
+    {
+        $categories = $this->categories($languageISO639);
+        unset($categories[0]);
+        $return = [];
+        foreach( $categories as $key => $value ) {
+            $return[$value] = $value;
+        }
+        return $return;
+    }
+
+    /**
      * Generate RSS feed
      * @param bool $output
      * @return string
