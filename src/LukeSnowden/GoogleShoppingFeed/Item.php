@@ -273,8 +273,8 @@ class Item
     public function shipping_weight($weight)
     {
         $node = new Node('shipping_weight');
-        $brand = $this->safeCharEncodeText($weight);
-        $this->nodes['brand'] = $node->value($brand)->_namespace($this->namespace)->addCdata();
+        $weight = $this->safeCharEncodeText($weight);
+        $this->nodes['shipping_weight'] = $node->value($weight)->_namespace($this->namespace)->addCdata();
     }
 
     /**
