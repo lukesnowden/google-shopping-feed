@@ -1,5 +1,6 @@
 
-###composer
+### Composer
+How to install with composer.
 
 ```json
 {
@@ -9,7 +10,8 @@
 }
 ```
 
-###Usage
+### Usage
+Example of Google feed generation.
 
 ```php
 use LukeSnowden\GoogleShoppingFeed\Containers\GoogleShopping;
@@ -51,9 +53,9 @@ GoogleShopping::asRss(true);
 
 ```
 
-###Category Taxonomies
+### Category Taxonomies
 
-returns a list of the categories. The list is updated daily from Googles Documentation
+Returns a list of the categories. The list is updated daily from Googles Documentation
 
 ```php
 $lang = 'gb';
