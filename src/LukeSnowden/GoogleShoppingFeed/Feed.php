@@ -130,7 +130,7 @@ class Feed
     public function createItem()
     {
         $this->channel();
-        $item = new Item;
+        $item = new Item($this);
         $index = 'index_' . md5(microtime());
         $this->items[$index] = $item;
         $item->setIndex($index);
