@@ -380,6 +380,18 @@ class Item
     }
 
     /**
+     * Adds a custom attribute to the shopping feed with namespace.
+     *
+     * @param string $name
+     * @param string $value
+     */
+    public function customWithNamespace($name, $value)
+    {
+        $node = new Node($name);
+        $this->nodes[$name] = $node->value($value)->_namespace($this->namespace);
+    }
+
+    /**
      * Returns item nodes
      * @return array
      */
