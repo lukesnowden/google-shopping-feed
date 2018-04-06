@@ -380,6 +380,18 @@ class Item
     }
 
     /**
+     * Adds a custom attribute to the shopping feed with namespace.
+     *
+     * @param string $name
+     * @param string $value
+     */
+    public function customWithNamespace($name, $value)
+    {
+        $node = new Node($name);
+        $this->nodes[$name] = $node->value($value)->_namespace($this->namespace);
+    }
+
+    /**
      * Returns item nodes
      * @return array
      */
@@ -503,12 +515,23 @@ class Item
     }
     
     /**
-     * @param $imageLink
+     * Add one additional image (string) or multiple images (array).
+     * 
+     * @param $imagesLink
      */
-    public function additional_image_link($imageLink)
+    public function additional_image_link($imagesLink)
     {
-        $node = new Node('additional_image_link');
-        $imageLink = $this->safeCharEncodeURL(urldecode($imageLink));
-        $this->nodes['additional_image_link'] = $node->value($imageLink)->_namespace($this->namespace)->addCdata();
+        $this->nodes['additional_image_link'] = [];
+        if (is_array($imagesLink)) {
+            foreach ($imagesLink as $imageLink) {
+                $node = new Node('additional_image_link');
+                $imageLink = $this->safeCharEncodeURL(urldecode($imageLink));
+                array_push($this->nodes['additional_image_link'], $node->value($imageLink)->_namespace($this->namespace)->addCdata());            
+            }
+        } else {
+            $node = new Node('additional_image_link');
+            $imageLink = $this->safeCharEncodeURL(urldecode($imagesLink));
+            array_push($this->nodes['additional_image_link'], $node->value($imagesLink)->_namespace($this->namespace)->addCdata()); 
+        }   
     }
 }
