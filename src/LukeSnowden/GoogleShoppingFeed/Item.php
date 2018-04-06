@@ -62,10 +62,20 @@ class Item
     private $index = null;
 
     /**
+     * @var Feed
+     */
+    private $googleShoppingFeed = null;
+
+    /**
      * [$namespace - (g:) namespace definition]
      * @var string
      */
     protected $namespace = 'http://base.google.com/ns/1.0';
+
+    public function __construct($googleShoppingFeed)
+    {
+        $this->googleShoppingFeed = $googleShoppingFeed;
+    }
 
     /**
      * @param $id
@@ -105,7 +115,7 @@ class Item
         $price = (float) preg_replace( "/^([0-9]+\.?[0-9]*)(\s[A-Z]{3})$/", "$1", $price );
         $node = new Node('price');
         $price = number_format($price, 2, '.', '');
-        $code = GoogleShopping::getIso4217CountryCode();
+        $code = $this->googleShoppingFeed->getIso4217CountryCode();
         $this->nodes['price'] = $node->value( $price . " {$code}" )->_namespace($this->namespace);
     }
 
@@ -118,7 +128,7 @@ class Item
         $salePrice = (float) preg_replace( "/^([0-9]+\.?[0-9]*)(\s[A-Z]{3})$/", "$1", $salePrice );
         $node = new Node('sale_price');
         $salePrice = number_format($salePrice, 2, '.', '');
-        $code = GoogleShopping::getIso4217CountryCode();
+        $code = $this->googleShoppingFeed->getIso4217CountryCode();
         $this->nodes['sale_price'] = $node->value( $salePrice . " {$code}" )->_namespace($this->namespace);
     }
 
@@ -414,7 +424,7 @@ class Item
      */
     public function delete()
     {
-        GoogleShopping::removeItemByIndex($this->index);
+        $this->googleShoppingFeed->removeItemByIndex($this->index);
     }
 
     /**
@@ -438,7 +448,7 @@ class Item
     {
        $groupIdentifiers = $this->getGroupIdentifier();
         /** @var Item $item */
-        $item = GoogleShopping::createItem();
+        $item = $this->googleShoppingFeed->createItem();
         $this->item_group_id( $groupIdentifiers );
         foreach ($this->nodes as $node) {
             if (is_array($node)) {
