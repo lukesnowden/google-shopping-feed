@@ -200,9 +200,7 @@ class Item
     }
 
     /**
-     * [is_bundle description]
-     * @param  [type]  $bundle [description]
-     * @return boolean         [description]
+     * @param $bundle
      */
     public function is_bundle($bundle)
     {
@@ -225,7 +223,7 @@ class Item
     public function product_type($productType)
     {
         $node = new Node('product_type');
-        $brand = $this->safeCharEncodeText($productType);
+        $productType = $this->safeCharEncodeText($productType);
         $this->nodes['product_type'] = $node->value($productType)->_namespace($this->namespace)->addCdata();
     }
 
@@ -265,7 +263,7 @@ class Item
     public function shipping($code, $service, $cost, $region = null)
     {
         $node = new Node('shipping');
-        $value = "<g:country>{$code}</g:country><g:service>{$service}</g:service><g:price>{$cost}</g:price>";
+        $value = "<g:country>{$code}</g:country><g:service><![CDATA[{$service}]]></g:service><g:price>{$cost}</g:price>";
 
         if($region) {
           $value .= "<g:region>{$region}</g:region>";
