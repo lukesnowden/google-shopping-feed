@@ -444,7 +444,7 @@ class Item
      */
     public function cloneIt()
     {
-       $groupIdentifiers = $this->getGroupIdentifier();
+        $groupIdentifiers = $this->getGroupIdentifier();
         /** @var Item $item */
         $item = $this->googleShoppingFeed->createItem();
         $this->item_group_id( $groupIdentifiers );
@@ -462,7 +462,14 @@ class Item
                     }
                 }
             } elseif ($node->get('name') !== 'shipping') {
-                $item->{$node->get('name')}($node->get('value'));
+                if (method_exists($item->{$node->get('name')})) {
+                    $item->{$node->get('name')}($node->get('value'));
+                    return $item;
+                }
+
+                if (!method_exists($item->{$node->get('name')})) {
+                    $item->custom($node->get('name'), ($node->get('value')));
+                }
             }
         }
         return $item;
