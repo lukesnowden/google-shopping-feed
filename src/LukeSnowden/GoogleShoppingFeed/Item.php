@@ -480,12 +480,12 @@ class Item
                     }
                 }
             } elseif ($node->get('name') !== 'shipping') {
-                if (method_exists($item->{$node->get('name')})) {
+                if (method_exists($item, $node->get('name'))) {
                     $item->{$node->get('name')}($node->get('value'));
-                    return $item;
+                    continue;
                 }
 
-                if (!method_exists($item->{$node->get('name')})) {
+                if (!method_exists($item, $node->get('name'))) {
                     $item->custom($node->get('name'), ($node->get('value')));
                 }
             }
