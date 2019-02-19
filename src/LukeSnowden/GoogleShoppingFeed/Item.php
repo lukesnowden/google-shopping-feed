@@ -470,14 +470,18 @@ class Item
             if (is_array($node)) {
                 // multiple accepted values..
                 $name = $node[0]->get('name');
+                $multipleNodes = array();
                 foreach ($node as $_node) {
                     if ($name == 'shipping') {
                         // Shipping has another layer so we are going to have to do a little hack
                         $xml = simplexml_load_string('<foo>' . trim(str_replace('g:', '', $_node->get('value'))) . '</foo>');
                         $item->{$_node->get('name')}($xml->country, $xml->service, $xml->price);
                     } else {
-                        $item->{$name}($_node->get('value'));
+                        $multipleNodes[$name][] = $_node->get('value');
                     }
+                }
+                if (count($multipleNodes)) {
+                    $item->{$name}($multipleNodes[$name]);
                 }
             } elseif ($node->get('name') !== 'shipping') {
                 if (method_exists($item, $node->get('name'))) {
