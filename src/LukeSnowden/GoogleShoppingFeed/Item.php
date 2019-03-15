@@ -255,6 +255,24 @@ class Item
     }
 
     /**
+     * @param $multipack
+     */
+    public function multipack($multipack)
+    {
+        $node = new Node('multipack');
+        $this->nodes['multipack'] = $node->value($multipack)->_namespace($this->namespace);
+    }
+
+    /**
+     * @param $unitPricingMeasure
+     */
+    public function unitPricingMeasure($unitPricingMeasure)
+    {
+        $node = new Node('unit_​pricing_​measure');
+        $this->nodes['unit_​pricing_​measure'] = $node->value($unitPricingMeasure)->_namespace($this->namespace);
+    }
+
+    /**
      * @param $code
      * @param $service
      * @param $cost
