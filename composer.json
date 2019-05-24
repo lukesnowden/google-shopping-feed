@@ -1,24 +1,5 @@
 {
-    "name": "lukesnowden/google-shopping-feed",
+    "name": "5zymon/google-shopping-feed",
     "description": "Google Shopping Feed API",
-    "homepage": "https://github.com/lukesnowden/google-shopping-feed",
-    "license": "MIT",
-    "keywords" : ["Google","Shopping","Google Shopping Feed","Feed","API"],
-    "authors": [
-        {
-            "name": "Luke Snowden",
-            "email": "luke@sno.wden.co.uk"
-        }
-    ],
-    "require": {
-        "php": ">=7.0.10",
-        "gregwar/cache": "1.0.*",
-        "league/csv": "9.*"
-    },
-    "autoload": {
-        "psr-0": {
-            "LukeSnowden\\GoogleShoppingFeed": "src/"
-        }
-    },
-    "minimum-stability": "dev"
+    "homepage": "https://github.com/lukesnowden/google-shopping-feed"
 }
