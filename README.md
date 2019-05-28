@@ -1,11 +1,16 @@
 
+# Google Shopping Feed
+
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Total Downloads](https://img.shields.io/packagist/dt/lukesnowden/google-shopping-feed.svg?style=flat-square)](https://packagist.org/packages/lukesnowden/google-shopping-feed)
+
 ### Composer
 How to install with composer.
 
 ```json
 {
     "require": {
-        "lukesnowden/google-shopping-feed": "dev-master"
+        "lukesnowden/google-shopping-feed": "^2.2"
     }
 }
 ```
