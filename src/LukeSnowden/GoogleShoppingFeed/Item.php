@@ -107,6 +107,16 @@ class Item
     }
 
     /**
+     * @param $link
+     */
+    public function ads_redirect($link)
+    {
+        $node = new Node('ads_redirect');
+        $link = $this->safeCharEncodeURL($link);
+        $this->nodes['ads_redirect'] = $node->value($link)->_namespace($this->namespace)->addCdata();
+    }
+
+    /**
      * @param $price
      */
     public function price($price)
