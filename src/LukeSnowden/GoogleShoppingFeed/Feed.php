@@ -67,7 +67,10 @@ class Feed
      */
     public function __construct()
     {
-        $this->feed = new SimpleXMLElement('<rss xmlns:g="' . $this->namespace . '" version="' . $this->version . '"></rss>');
+        $document = '<?xml version="1.0" encoding="utf-8"?>';
+        $document =  $document . '<rss xmlns:g="' . $this->namespace . '" version="' . $this->version . '"></rss>';
+
+        $this->feed = new SimpleXMLElement($document);
     }
 
     /**
