@@ -142,6 +142,15 @@ class Item
     }
 
     /**
+     * @param $salePriceEffectiveDate
+     */
+    public function sale_price_effective_date($salePriceEffectiveDate)
+    {
+        $node = new Node('sale_price_effective_date');
+        $this->nodes['sale_price_effective_date'] = $node->value( $salePriceEffectiveDate )->_namespace($this->namespace);
+    }
+
+    /**
      * @param $description
      * @param string $encoding
      */
