@@ -142,15 +142,6 @@ class Item
     }
 
     /**
-     * @param $salePriceEffectiveDate
-     */
-    public function sale_price_effective_date($salePriceEffectiveDate)
-    {
-        $node = new Node('sale_price_effective_date');
-        $this->nodes['sale_price_effective_date'] = $node->value( $salePriceEffectiveDate )->_namespace($this->namespace);
-    }
-
-    /**
      * @param $description
      * @param string $encoding
      */
@@ -573,10 +564,10 @@ class Item
         $node = new Node('pattern');
         $this->nodes['pattern'] = $node->value($pattern)->_namespace($this->namespace);
     }
-
+    
     /**
      * Add one additional image (string) or multiple images (array).
-     *
+     * 
      * @param $imagesLink
      */
     public function additional_image_link($imagesLink)
@@ -586,12 +577,12 @@ class Item
             foreach ($imagesLink as $imageLink) {
                 $node = new Node('additional_image_link');
                 $imageLink = $this->safeCharEncodeURL(urldecode($imageLink));
-                array_push($this->nodes['additional_image_link'], $node->value($imageLink)->_namespace($this->namespace)->addCdata());
+                array_push($this->nodes['additional_image_link'], $node->value($imageLink)->_namespace($this->namespace)->addCdata());            
             }
         } else {
             $node = new Node('additional_image_link');
             $imageLink = $this->safeCharEncodeURL(urldecode($imagesLink));
-            array_push($this->nodes['additional_image_link'], $node->value($imagesLink)->_namespace($this->namespace)->addCdata());
-        }
+            array_push($this->nodes['additional_image_link'], $node->value($imagesLink)->_namespace($this->namespace)->addCdata()); 
+        }   
     }
 }
