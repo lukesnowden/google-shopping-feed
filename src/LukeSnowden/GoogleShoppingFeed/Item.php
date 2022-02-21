@@ -14,6 +14,8 @@ class Item
     const OUTOFSTOCK      = 'out of stock';
 
     const PREORDER        = 'preorder';
+    
+    const BACKORDER       = 'backorder';
 
     const BRANDNEW        = 'new';
 
