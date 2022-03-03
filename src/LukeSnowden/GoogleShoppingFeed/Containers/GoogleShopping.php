@@ -1,8 +1,12 @@
 <?php
 
+
+
 namespace LukeSnowden\GoogleShoppingFeed\Containers;
 
-use LukeSnowden\GoogleShoppingFeed\Feed;
+use LukeSnowden\GoogleShoppingFeed\Formats;
+use LukeSnowden\GoogleShoppingFeed\Formats\Csv;
+use LukeSnowden\GoogleShoppingFeed\Formats\Xml;
 
 class GoogleShopping
 {
@@ -18,8 +22,12 @@ class GoogleShopping
      */
     public static function container()
     {
-        if (is_null(static::$container)) {
-            static::$container = new Feed;
+        if (is_null(static::$container) || static::$container == Formats::XML) {
+            static::$container = new Xml;
+        }
+
+        if (static::$container == Formats::CSV) {
+            static::$container = new Csv();
         }
 
         return static::$container;
