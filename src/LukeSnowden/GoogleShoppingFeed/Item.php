@@ -293,8 +293,17 @@ class Item
      */
     public function unitPricingMeasure($unitPricingMeasure)
     {
-        $node = new Node('unit_​pricing_​measure');
-        $this->nodes['unit_​pricing_​measure'] = $node->value($unitPricingMeasure)->_namespace($this->namespace);
+        $node = new Node('unit_pricing_measure');
+        $this->nodes['unit_pricing_measure'] = $node->value($unitPricingMeasure)->_namespace($this->namespace);
+    }
+
+    /**
+     * @param $unitPricingBaseMeasure
+     */
+    public function unitPricingBaseMeasure($unitPricingBaseMeasure)
+    {
+        $node = new Node('unit_pricing_base_measure');
+        $this->nodes['unit_pricing_base_measure'] = $node->value($unitPricingBaseMeasure)->_namespace($this->namespace);
     }
 
     /**
