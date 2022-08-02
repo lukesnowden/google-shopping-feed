@@ -99,6 +99,16 @@ class Item
     }
 
     /**
+     * @param $short_title
+     */
+    public function short_title($short_title)
+    {
+        $node = new Node('short_title');
+        $short_title = $this->safeCharEncodeText($short_title);
+        $this->nodes['short_title'] = $node->value($short_title)->_namespace($this->namespace)->addCdata();
+    }
+
+    /**
      * @param $link
      */
     public function link($link)
