@@ -398,7 +398,7 @@ class Item
     public function custom_label_0($customLabel)
     {
         $node = new Node('custom_label_0');
-        $this->nodes['custom_label_0'] = $node->value($customLabel)->_namespace($this->namespace);
+        $this->nodes['custom_label_0'] = $node->value($customLabel)->_namespace($this->namespace)->addCdata();
     }
 
     /**
@@ -407,7 +407,7 @@ class Item
     public function custom_label_1($customLabel)
     {
         $node = new Node('custom_label_1');
-        $this->nodes['custom_label_1'] = $node->value($customLabel)->_namespace($this->namespace);
+        $this->nodes['custom_label_1'] = $node->value($customLabel)->_namespace($this->namespace)->addCdata();
     }
 
     /**
@@ -416,7 +416,7 @@ class Item
     public function custom_label_2($customLabel)
     {
         $node = new Node('custom_label_2');
-        $this->nodes['custom_label_2'] = $node->value($customLabel)->_namespace($this->namespace);
+        $this->nodes['custom_label_2'] = $node->value($customLabel)->_namespace($this->namespace)->addCdata();
     }
 
     /**
@@ -425,7 +425,7 @@ class Item
     public function custom_label_3($customLabel)
     {
         $node = new Node('custom_label_3');
-        $this->nodes['custom_label_3'] = $node->value($customLabel)->_namespace($this->namespace);
+        $this->nodes['custom_label_3'] = $node->value($customLabel)->_namespace($this->namespace)->addCdata();
     }
 
     /**
@@ -434,7 +434,7 @@ class Item
     public function custom_label_4($customLabel)
     {
         $node = new Node('custom_label_4');
-        $this->nodes['custom_label_4'] = $node->value($customLabel)->_namespace($this->namespace);
+        $this->nodes['custom_label_4'] = $node->value($customLabel)->_namespace($this->namespace)->addCdata();
     }
 
     /**
