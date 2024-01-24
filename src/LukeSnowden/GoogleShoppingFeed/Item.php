@@ -109,6 +109,16 @@ class Item
     }
 
     /**
+     * @param $mobile_link
+     */
+    public function mobile_link($mobile_link)
+    {
+        $node = new Node('mobile_link');
+        $link = $this->safeCharEncodeURL($mobile_link);
+        $this->nodes['mobile_link'] = $node->value($mobile_link)->_namespace($this->namespace)->addCdata();
+    }
+
+    /**
      * @param $link
      */
     public function link($link)
