@@ -217,6 +217,16 @@ class Item
     }
 
     /**
+     * @param $lifestyleImageLink
+     */
+    public function lifestyle_image_link($lifestyleImageLink)
+    {
+        $node = new Node('lifestyle_image_link');
+        $lifestyleImageLink = $this->safeCharEncodeURL(urldecode($lifestyleImageLink));
+        $this->nodes['lifestyle_image_link'] = $node->value($lifestyleImageLink)->_namespace($this->namespace)->addCdata();
+    }
+
+    /**
      * @param $brand
      */
     public function brand($brand)
